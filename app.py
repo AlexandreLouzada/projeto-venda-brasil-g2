@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
+import matplotlib.ticker as mtick
 import seaborn as sns
 from sqlalchemy import create_engine
 
@@ -133,7 +134,13 @@ with aba1:
         .sort_values("ano_mes")
     )
 
+    
     fig, ax = plt.subplots(figsize=(12, 5))
+    
+    ax.yaxis.set_major_formatter(
+    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+)
+
     sns.lineplot(data=serie_mensal, x="ano_mes", y="receita", marker="o", label="Receita", ax=ax)
     sns.lineplot(data=serie_mensal, x="ano_mes", y="lucro", marker="o", label="Lucro", ax=ax)
     ax.set_title("Evolução Mensal da Receita e do Lucro")
@@ -161,6 +168,11 @@ with aba2:
         )
 
         fig, ax = plt.subplots(figsize=(8, 5))
+
+        ax.yaxis.set_major_formatter(
+    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+)
+        
         sns.barplot(data=receita_canal, x="canal", y="receita", ax=ax)
         ax.set_title("Receita por Canal")
         ax.set_xlabel("Canal")
@@ -178,6 +190,11 @@ with aba2:
         margem_canal["margem_lucro"] = margem_canal["lucro"] / margem_canal["receita"]
 
         fig, ax = plt.subplots(figsize=(8, 5))
+
+        ax.yaxis.set_major_formatter(
+    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+)
+        
         sns.barplot(data=margem_canal, x="canal", y="margem_lucro", ax=ax)
         ax.set_title("Margem de Lucro por Canal")
         ax.set_xlabel("Canal")
@@ -194,6 +211,9 @@ with aba2:
     )
 
     fig, ax = plt.subplots(figsize=(10, 5))
+    ax.yaxis.set_major_formatter(
+    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+)
     sns.barplot(data=receita_categoria, x="categoria", y="receita", ax=ax)
     ax.set_title("Receita por Categoria")
     ax.set_xlabel("Categoria")
@@ -212,6 +232,9 @@ with aba3:
     )
 
     fig, ax = plt.subplots(figsize=(12, 5))
+    ax.yaxis.set_major_formatter(
+    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+)
     sns.barplot(data=receita_uf, x="uf", y="receita", ax=ax)
     ax.set_title("Receita por UF")
     ax.set_xlabel("UF")

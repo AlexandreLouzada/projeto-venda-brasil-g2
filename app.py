@@ -197,7 +197,6 @@ with aba2:
         ax.set_xlabel("Canal")
         ax.set_ylabel("Margem")
         ax.yaxis.set_major_formatter(
-        ax.yaxis.set_major_formatter(
             mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
         )
         ax.tick_params(axis="x", rotation=30)

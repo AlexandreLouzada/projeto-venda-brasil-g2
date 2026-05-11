@@ -191,14 +191,15 @@ with aba2:
 
         fig, ax = plt.subplots(figsize=(8, 5))
 
-        ax.yaxis.set_major_formatter(
-    mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
-)
-        
+
         sns.barplot(data=margem_canal, x="canal", y="margem_lucro", ax=ax)
         ax.set_title("Margem de Lucro por Canal")
         ax.set_xlabel("Canal")
         ax.set_ylabel("Margem")
+        ax.yaxis.set_major_formatter(
+        ax.yaxis.set_major_formatter(
+            mtick.FuncFormatter(lambda x, _: f'R$ {x/1_000_000:.1f} mi')
+        )
         ax.tick_params(axis="x", rotation=30)
         st.pyplot(fig)
 
